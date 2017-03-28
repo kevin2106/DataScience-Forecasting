@@ -1,0 +1,9 @@
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\bin\Debug\Data Science - Forecasting.exe.config
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\bin\Debug\Data Science - Forecasting.exe
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\bin\Debug\Data Science - Forecasting.pdb
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.csprojResolveAssemblyReference.cache
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data_Science___Forecasting.Form1.resources
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data_Science___Forecasting.Properties.Resources.resources
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.csproj.GenerateResource.Cache
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.exe
+c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.pdb
