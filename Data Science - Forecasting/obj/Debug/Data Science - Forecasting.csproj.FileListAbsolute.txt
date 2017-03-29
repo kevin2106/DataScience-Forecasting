@@ -7,3 +7,6 @@ c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecastin
 c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.csproj.GenerateResource.Cache
 c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.exe
 c:\users\kevinpc\documents\visual studio 2015\Projects\Data Science - Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.pdb
+C:\Users\KevinPC\Documents\DataScience-Forecasting\Data Science - Forecasting\bin\Debug\Data Science - Forecasting.exe.config
+C:\Users\KevinPC\Documents\DataScience-Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.exe
+C:\Users\KevinPC\Documents\DataScience-Forecasting\Data Science - Forecasting\obj\Debug\Data Science - Forecasting.pdb
