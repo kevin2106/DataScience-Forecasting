@@ -25,21 +25,48 @@ namespace Data_Science___Forecasting
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            List<DemandPoint> data = CSVReader.getDemandPoints();
-            Series demandSeries = new Series("Demand");
-            demandSeries.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             demandChart.ChartAreas[0].AxisX.Title = "Time";
             demandChart.ChartAreas[0].AxisY.Title = "Demand";
 
+            List<DemandPoint> data = CSVReader.getDemandPoints();
+            data = Forecast.calcSES(data);
+
+            Series demandSeries = new Series("Demand");
+            demandSeries.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            demandSeries.BorderWidth = 5;
             for (int x = 0; x < data.Count; x++) {
                 demandSeries.Points.AddXY(data[x].time, data[x].demand);
             }
 
-            demandSeries.BorderWidth = 5;
-            demandChart.Series.Add(demandSeries);
+            Series SmoothedSeries = new Series("Smoothed");
+            SmoothedSeries.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            SmoothedSeries.BorderWidth = 5;
+            for (int x = 0; x < data.Count; x++)
+            {
+                SmoothedSeries.Points.AddXY(data[x].time, data[x].smoothend);
+            }
 
-            
+            for (int i = 1; i < 13; i++)
+            {
+                DemandPoint lastPoint = data[data.Count - 1];
+                lastPoint.time = 36 + i;
+                data.Add(lastPoint);
+            }
+            data = Forecast.smoothList(data);
+
+            Series forecastSES = new Series("SES Forecast");
+            forecastSES.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            forecastSES.BorderWidth = 5;
+            for (int x = 0; x < data.Count; x++)
+            {
+                forecastSES.Points.AddXY(data[x].time, data[x].smoothend);
+            }
+
+            demandChart.Series.Add(demandSeries);
+            demandChart.Series.Add(SmoothedSeries);
+            demandChart.Series.Add(forecastSES);
+
+
         }
 
     }

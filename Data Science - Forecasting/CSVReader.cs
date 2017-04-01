@@ -22,7 +22,7 @@ namespace Data_Science___Forecasting
                     var values = line.Split(';');
 
                     demandPoint.time = Convert.ToInt32(values[0]);
-                    demandPoint.demand = Convert.ToInt32(values[1]);
+                    demandPoint.demand = Convert.ToSingle(values[1]);
 
                     demandPointsList.Add(demandPoint);
                 }

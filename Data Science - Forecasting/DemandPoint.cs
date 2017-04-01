@@ -9,7 +9,8 @@ namespace Data_Science___Forecasting
     class DemandPoint
     {
         public int time { get; set; }
-        public int demand { get; set; }
+        public float demand { get; set; }
+        public float smoothend { get; set; }
 
     }
 }
