@@ -29,7 +29,7 @@ namespace Data_Science___Forecasting
             demandChart.ChartAreas[0].AxisY.Title = "Demand";
 
             List<DemandPoint> data = CSVReader.getDemandPoints();
-            data = Forecast.calcSES(data);
+            data = ForecastSES.calcSES(data);
 
             Series demandSeries = new Series("Demand");
             demandSeries.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -46,28 +46,49 @@ namespace Data_Science___Forecasting
                 SmoothedSeries.Points.AddXY(data[x].time, data[x].smoothend);
             }
 
-            for (int i = 1; i < 13; i++)
-            {
-                DemandPoint lastPoint = data[data.Count - 1];
-                lastPoint.time = 36 + i;
-                data.Add(lastPoint);
-            }
-            data = Forecast.smoothList(data);
+            List<DemandPoint> forecastDataSES = ForecastSES.forecast(data);
 
             Series forecastSES = new Series("SES Forecast");
             forecastSES.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             forecastSES.BorderWidth = 5;
-            for (int x = 0; x < data.Count; x++)
+            for (int x = 0; x < forecastDataSES.Count; x++)
             {
-                forecastSES.Points.AddXY(data[x].time, data[x].smoothend);
+                forecastSES.Points.AddXY(forecastDataSES[x].time, forecastDataSES[x].smoothend);
             }
 
+            data = ForecastDES.calcDES(data);
+
+            Series trendSeries = new Series("Trend Series");
+            trendSeries.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            trendSeries.BorderWidth = 5;
+            for (int x = 1; x < data.Count; x++)
+            {
+                trendSeries.Points.AddXY(data[x].time, data[x].trendDemand);
+            }
+
+            List<DemandPoint> forecastDataDES = ForecastDES.forecast(data);
+
+            Series forecastDES = new Series("DES Forecast");
+            forecastDES.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            forecastDES.BorderWidth = 5;
+            for (int x = 1; x < forecastDataDES.Count; x++)
+            {
+                forecastDES.Points.AddXY(forecastDataDES[x].time, forecastDataDES[x].trendDemand);
+            }
+
+
             demandChart.Series.Add(demandSeries);
-            demandChart.Series.Add(SmoothedSeries);
+            //demandChart.Series.Add(SmoothedSeries);
             demandChart.Series.Add(forecastSES);
+            //demandChart.Series.Add(trendSeries);
+            demandChart.Series.Add(forecastDES);
 
+            sesError.Text = "Error: " + ForecastSES.optimalError;
+            sesAlpha.Text = "Alpha: " + ForecastSES.alpha;
 
+            desError.Text = "Error: " + ForecastDES.optimalError;
+            desAlpha.Text = "Alpha: " + ForecastDES.alpha;
+            desBeta.Text = "Beta: " + ForecastDES.beta;
         }
-
     }
 }

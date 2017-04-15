@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Data_Science___Forecasting
 {
-    class Forecast
+    class ForecastSES
     {
-        static float alpha = 0.1f;
+        public static float alpha = 0.1f;
         static float precisionStep = 0.01f;
 
         static float optimalAlpha = 1f;
-        static double optimalError = double.PositiveInfinity;
+        public static double optimalError = double.PositiveInfinity;
 
         public static List<DemandPoint> calcSES(List<DemandPoint> demandList)
         {
             List<DemandPoint> smoothedList = demandList;
-            smoothedList[0] = calculateFirstAverage(demandList);
+            smoothedList[0] = initialization(demandList);
 
             while (alpha < 1) {
                 smoothedList = smoothList(smoothedList);
@@ -34,21 +34,21 @@ namespace Data_Science___Forecasting
             smoothedList = smoothList(smoothedList);
 
             Console.WriteLine("OPTIMAL ERROR: " + optimalError);
-            Console.WriteLine("OPTIMAL ALPHA: " + optimalAlpha);
+           Console.WriteLine("OPTIMAL ALPHA: " + optimalAlpha);
 
             return smoothedList;
         }
 
         public static List<DemandPoint> smoothList(List<DemandPoint> values) {
             List<DemandPoint> smoothedList = values;
-            for (int i = 1; i < smoothedList.Count; i++)
+            for (int i = 1; i < 36; i++)
             {
                 smoothedList[i].smoothend = smoothPoint(smoothedList[i - 1]);
             }
             return smoothedList;
         }
 
-        private static DemandPoint calculateFirstAverage(List<DemandPoint> values)
+        private static DemandPoint initialization(List<DemandPoint> values)
         {
             float average = 0;
             for (int i = 0; i < 12; i++)
@@ -60,6 +60,20 @@ namespace Data_Science___Forecasting
             return values[0];
         }
 
+        public static List<DemandPoint> forecast(List<DemandPoint> data)
+        {
+            List<DemandPoint> forecastList = new List<DemandPoint>(data);
+            for (int i = 1; i < 13; i++)
+            {
+                DemandPoint lastpoint = forecastList[forecastList.Count - 1];
+                DemandPoint newPoint = new DemandPoint();
+                newPoint.time = 36 + i;
+                newPoint.smoothend = lastpoint.smoothend;
+                Console.WriteLine("SMOOTEHND: " + lastpoint.time + " : " + lastpoint.smoothend);
+                forecastList.Add(newPoint);
+            }
+            return forecastList;
+        }
         private static float smoothPoint(DemandPoint prevPoint)
         {
             return alpha * prevPoint.demand + (1 - alpha) * prevPoint.smoothend;
